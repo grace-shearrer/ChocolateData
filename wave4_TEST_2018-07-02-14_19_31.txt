@@ -1,0 +1,5 @@
+/projects/niblab/bids_projects/Experiments/EricData/data/derivatives/sub-072_ses-4_task-imagine_bold_brain
+/projects/niblab/bids_projects/Experiments/EricData/data/derivatives/sub-085_ses-4_task-milkshakeC_bold_brain
+/projects/niblab/bids_projects/Experiments/EricData/data/derivatives/sub-088_ses-4_task-milkshakeD_bold_brain
+/projects/niblab/bids_projects/Experiments/EricData/data/derivatives/sub-101_ses-4_task-imagine_bold_brain
+/projects/niblab/bids_projects/Experiments/EricData/data/derivatives/sub-101_ses-4_task-milkshakeC_bold_brain
