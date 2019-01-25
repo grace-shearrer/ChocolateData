@@ -39,7 +39,7 @@ y = behavioral["Label"]
 
 
 #restrict data to our target analysis 
-condition_mask = behavioral["Label"].isin(['LF_LS_receipt', "h20_receipt"])
+condition_mask = behavioral["Label"].isin(['HF_HS_receipt', "h20_receipt"])
 y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())
@@ -51,6 +51,11 @@ X = masker.fit_transform(dataset)
 # Apply our condition_mask
 X = X[condition_mask]
 
+# Fill Missing Values 
+from sklearn.preprocessing import Imputer 
+imputer = Imputer(missing_values="NaaN", strategy="mean", axis=1)
+imputer = imputer.fit(X)
+X = imputer.transform(X)
 
 
 
@@ -101,12 +106,12 @@ weight_img = masker.inverse_transform(coef)
 # Use the mean image as a background to avoid relying on anatomical data
 from nilearn import image
 mean_img = image.mean_img(dataset)
-mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_LF_LS_milkshake_mean_nimask_01.nii')
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_mean_nimask.nii')
 
 # Create the figure
 from nilearn.plotting import plot_stat_map, show
-display = plot_stat_map(weight_img, mean_img, title='SVM weights LF_LS vs h2O')
-display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_LF_LS_milkshake_nestCV_nimask_01.png')
+display = plot_stat_map(weight_img, mean_img, title='SVM weights HF_HS vs h2O')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_nestCV_nimask.png')
 # Saving the results as a Nifti file may also be important
-weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_LF_LS_milkshake_nestCV_nimask_01.nii')
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_nestCV_nimask.nii')
 
