@@ -1,6 +1,6 @@
 # Chocolate Experiment
 
-The chocolate study was a task-stimulus experiment with multiple tasks and 4 sessions(waves) with <90 subjects each. We are going to see if we can decode the categories from the fMRI activity recoreded in masks of the ventral stream. Significant prediction shows that the signal in the region contains information on the corresponding category.  
+The chocolate study was a task-stimulus experiment with multiple tasks and 4 sessions(waves) with <90 subjects each. Currently we are going to see if we can decode the categories from the fMRI activity recoreded in masks of the ventral stream. Significant prediction shows that the signal in the region contains information on the corresponding category.  
   
 
 
