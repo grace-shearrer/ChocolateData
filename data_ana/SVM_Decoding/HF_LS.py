@@ -39,7 +39,7 @@ y = behavioral["Label"]
 
 
 #restrict data to our target analysis 
-condition_mask = behavioral["Label"].isin(['HF_HS_receipt', "h20_receipt"])
+condition_mask = behavioral["Label"].isin(['HF_LS_receipt', "h20_receipt"])
 y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())
@@ -50,6 +50,8 @@ masker = NiftiMasker(mask_img=imag_mask,
 X = masker.fit_transform(dataset)
 # Apply our condition_mask
 X = X[condition_mask]
+
+
 
 
 
@@ -82,8 +84,8 @@ from sklearn.model_selection import GridSearchCV
 
 # Note that GridSearchCV takes an n_jobs argument that can make it go
 # much faster'
-grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
-nested_cv_scores = cross_val_score(grid, X, y, cv=5)
+grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=3)
+nested_cv_scores = cross_val_score(grid, X, y, cv=3)
 
 print("Nested CV score: %.4f" % np.mean(nested_cv_scores))
 
@@ -99,12 +101,12 @@ weight_img = masker.inverse_transform(coef)
 # Use the mean image as a background to avoid relying on anatomical data
 from nilearn import image
 mean_img = image.mean_img(dataset)
-mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_mean_nimask.nii')
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_LS_milkshake_mean_nimask.nii')
 
 # Create the figure
 from nilearn.plotting import plot_stat_map, show
-display = plot_stat_map(weight_img, mean_img, title='SVM weights HF_HS vs h2O')
-display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_nestCV_nimask.png')
+display = plot_stat_map(weight_img, mean_img, title='SVM weights HF_LS vs h2O')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_LS_milkshake_nestCV_nimask.png')
 # Saving the results as a Nifti file may also be important
-weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_HS_milkshake_nestCV_nimask.nii')
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/images/all_HF_LS_milkshake_nestCV_nimask.nii')
 

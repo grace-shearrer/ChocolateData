@@ -51,13 +51,6 @@ X = masker.fit_transform(dataset)
 # Apply our condition_mask
 X = X[condition_mask]
 
-# Fill Missing Values 
-from sklearn.preprocessing import Imputer 
-imputer = Imputer(missing_values="NaaN", strategy="mean", axis=1)
-imputer = imputer.fit(X)
-X = imputer.transform(X)
-
-
 
 
 
