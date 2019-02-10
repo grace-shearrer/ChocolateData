@@ -7,7 +7,7 @@ The chocolate study was a task-stimulus experiment with multiple tasks and 4 ses
 * **Kyle Burger** - *Initial work* - [Kyle](https://github.com/burgerks)
 * **Jenny Sadler** - *Initial work* - [Jenny](https://github.com/jennyrsadler)
 * **Nichollette Acosta** - *Initial work* - [NikkiBytes](https://github.com/NikkiBytes)
-* **Grace Shearrer 
+* **Grace Shearrer** - *Initial work* [Grace](https://github.com/grace-shearrer)
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## Acknowledgments
