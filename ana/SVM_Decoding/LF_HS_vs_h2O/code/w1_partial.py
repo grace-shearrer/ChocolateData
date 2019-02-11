@@ -50,9 +50,6 @@ y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())
 
-session = behavioral[condition_mask].to_records(index=False)
-print(session.dtype.names)
-
 
 # In[ ]:
 
