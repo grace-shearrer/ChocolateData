@@ -3,10 +3,10 @@
 The chocolate study was a task-stimulus experiment with multiple tasks and 4 sessions(waves) with <90 subjects each. Currently we are going to see if we can decode the categories from the fMRI activity recoreded in masks of the ventral stream. Significant prediction shows that the signal in the region contains information on the corresponding category.  
   
 ## Directory
-[Changelog](https://github.com/niblunc/Bevel/blob/master/CHANGELOG.md) - See CHANGELOG.md for current data status and any note-worthy changes or comments.  
-[ana](https://github.com/niblunc/Bevel/tree/master/ana)  : analysis scripts and files<br/>
-[info](https://github.com/niblunc/Bevel/tree/master/info)    : information on the Bevel file structure and study<br/> 
-[preprocessing](https://github.com/niblunc/Bevel/tree/master/preprocessing)    : data prepping and preprocessing scripts <br/>
+[Changelog](https://github.com/niblunc/ChocolateData/blob/master/CHANGELOG.md) - See CHANGELOG.md for current data status and any note-worthy changes or comments.  
+[ana](https://github.com/niblunc/ChocolateData/tree/master/ana)  : analysis scripts and files<br/>
+[info](https://github.com/niblunc/ChocolateData/tree/master/info)    : information on the Bevel file structure and study<br/> 
+[preprocessing](https://github.com/niblunc/ChocolateData/tree/master/preprocessing)    : data prepping and preprocessing scripts <br/>
 
 ## Authors
 * **Kyle Burger** - *Initial work* - [Kyle](https://github.com/burgerks)
