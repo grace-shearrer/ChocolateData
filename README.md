@@ -10,7 +10,10 @@ The chocolate study was a task-stimulus experiment with multiple tasks and 4 ses
 
 
 [info](https://github.com/niblunc/ChocolateData/tree/master/info)    : information on the Bevel file structure and study<br/> 
-[preprocessing](https://github.com/niblunc/ChocolateData/tree/master/preprocessing)    : data prepping and preprocessing scripts <br/>
+[preprocessing](https://github.com/niblunc/ChocolateData/tree/master/preprocessing)    : data prepping and preprocessing scripts <br/>  
+* [BIDS](https://github.com/niblunc/ChocolateData/tree/master/preprocessing/bids)  
+* [fmriprep]()  
+* [feat1](https://github.com/niblunc/ChocolateData/tree/master/preprocessing/feat1)  
 
 ## Authors
 * **Kyle Burger** - *Initial work* - [Kyle](https://github.com/burgerks)
