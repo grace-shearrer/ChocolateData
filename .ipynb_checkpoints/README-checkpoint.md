@@ -7,6 +7,8 @@ The chocolate study was a task-stimulus experiment with multiple tasks and 4 ses
 [ana](https://github.com/niblunc/ChocolateData/tree/master/ana)  : analysis scripts and files<br/>  
 * [SVM Decoding Analysis](https://github.com/niblunc/ChocolateData/tree/master/ana/SVM_Decoding)  
 * [SpaceNet Decoding](https://github.com/niblunc/ChocolateData/tree/master/ana/SpaceNet_Decoding)  
+
+
 [info](https://github.com/niblunc/ChocolateData/tree/master/info)    : information on the Bevel file structure and study<br/> 
 [preprocessing](https://github.com/niblunc/ChocolateData/tree/master/preprocessing)    : data prepping and preprocessing scripts <br/>
 
