@@ -1,5 +1,0 @@
-Empty: sub-091 
- Empty: sub-091 
- Empty: Enter directory path of your subjects:  
- Empty: sub-091 
- 
