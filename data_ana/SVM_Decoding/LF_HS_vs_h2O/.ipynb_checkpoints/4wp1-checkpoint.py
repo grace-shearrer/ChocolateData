@@ -14,16 +14,19 @@ import os
 import numpy as np
 import nilearn
 import glob
-#import matplotlib
 import nibabel as nib
 import pandas as pd 
-from nilearn.input_data import NiftiMasker 
 import numpy as np
-np.seterr(divide='ignore', invalid='ignore')
 import warnings
-warnings.filterwarnings("ignore")
 import matplotlib
+from sklearn.model_selection import cross_val_score
+from nilearn.input_data import NiftiMasker 
+
+
 matplotlib.use('Agg')
+warnings.filterwarnings("ignore")
+np.seterr(divide='ignore', invalid='ignore')
+
 
 
 

@@ -24,6 +24,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import matplotlib
 matplotlib.use('Agg')
+from sklearn.model_selection import cross_val_score
 
 
 

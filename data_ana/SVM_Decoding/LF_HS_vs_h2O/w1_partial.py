@@ -25,6 +25,7 @@ warnings.filterwarnings("ignore")
 import matplotlib
 matplotlib.use('Agg')
 
+from sklearn.model_selection import cross_val_score
 
 
 #image mask
@@ -119,12 +120,12 @@ weight_img = masker.inverse_transform(coef)
 # Use the mean image as a background to avoid relying on anatomical data
 from nilearn import image
 mean_img = image.mean_img(dataset)
-mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_partial_mean_nimask.nii')
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1/w1_partial_mean_nimask.nii')
 
 # Create the figure
 from nilearn.plotting import plot_stat_map, show
-display = plot_stat_map(weight_img, mean_img, title='SVM weights LF_HS vs h2O wave 1 partial')
-display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_partial_SVM_nimask.png')
+display = plot_stat_map(weight_img, mean_img, title='SVM weights LF_HS vs h2O w1')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1/w1_partial_SVM_nimask.png')
 # Saving the results as a Nifti file may also be important
-weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_partial_SVM_nimask.nii')
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1/w1_partial_SVM_nimask.nii')
 
