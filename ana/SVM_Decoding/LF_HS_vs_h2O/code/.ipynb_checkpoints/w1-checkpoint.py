@@ -44,7 +44,7 @@ y = behavioral["Label"]
 
 
 #restrict data to our target analysis 
-condition_mask = behavioral["Label"].isin(['HF_LS_receipt', "h20_receipt"])
+condition_mask = behavioral["Label"].isin(['LF_HS_receipt', "h20_receipt"])
 y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())
@@ -91,7 +91,7 @@ from sklearn.model_selection import GridSearchCV
 
 # Note that GridSearchCV takes an n_jobs argument that can make it go
 # much faster'
-k_range = [50, 500, 5000]
+k_range = [100]
 grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
 nested_cv_scores = cross_val_score(grid, X, y, cv=5)
 

@@ -34,11 +34,6 @@ np.seterr(divide='ignore', invalid='ignore')
 imag_mask='/projects/niblab/bids_projects/Experiments/ChocoData/images/bin_mask.nii.gz'
 
 
-# In[ ]:
-
-#######################
-### WAVE 4, SPLIT 1 ###
-#######################
 #our behavioral csv file 
 stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/4w_part1.csv'
 
