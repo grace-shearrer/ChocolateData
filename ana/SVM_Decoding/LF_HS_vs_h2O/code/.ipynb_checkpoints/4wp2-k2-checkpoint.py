@@ -40,10 +40,10 @@ imag_mask='/projects/niblab/bids_projects/Experiments/ChocoData/images/bin_mask.
 ### WAVE 4, SPLIT 1 ###
 #######################
 #our behavioral csv file 
-stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/4w_part1.csv'
+stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/4w_part2.csv'
 
 #our dataset concatenated image 
-dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/4w_part1.nii.gz'
+dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/4w_part2.nii.gz'
 #load behavioral data into a pandas df
 behavioral = pd.read_csv(stim, sep="\t")
 #grab conditional labels 
