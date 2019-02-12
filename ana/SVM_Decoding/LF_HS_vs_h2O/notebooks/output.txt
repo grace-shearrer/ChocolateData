@@ -1,0 +1,35 @@
+4wp1 -
+Fitting 5 folds for each of 2 candidates, totalling 10 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  10 out of  10 | elapsed: 31.0min finished  
+Fitting 5 folds for each of 2 candidates, totalling 10 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  10 out of  10 | elapsed: 31.1min finished  
+Fitting 5 folds for each of 2 candidates, totalling 10 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  10 out of  10 | elapsed: 32.8min finished  
+Fitting 5 folds for each of 2 candidates, totalling 10 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  10 out of  10 | elapsed: 33.1min finished  
+Fitting 5 folds for each of 2 candidates, totalling 10 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+  [Parallel(n_jobs=1)]: Done  10 out of  10 | elapsed: 33.4min finished  
+  
+  w1part
+  
+  Fitting 5 folds for each of 7 candidates, totalling 35 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+ [Parallel(n_jobs=1)]: Done  35 out of  35 | elapsed: 25.1min finished  
+Fitting 5 folds for each of 7 candidates, totalling 35 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  35 out of  35 | elapsed: 24.3min finished  
+Fitting 5 folds for each of 7 candidates, totalling 35 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+[Parallel(n_jobs=1)]: Done  35 out of  35 | elapsed: 24.9min finished  
+Fitting 5 folds for each of 7 candidates, totalling 35 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+   [Parallel(n_jobs=1)]: Done  35 out of  35 | elapsed: 23.4min finished  
+Fitting 5 folds for each of 7 candidates, totalling 35 fits  
+[Parallel(n_jobs=1)]: Using backend SequentialBackend with 1 concurrent workers.  
+  [Parallel(n_jobs=1)]: Done  35 out of  35 | elapsed: 24.1min finished  
+  
