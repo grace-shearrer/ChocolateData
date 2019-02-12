@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+#SBATCH --job-name=4WP1_LF_HS
+#SBATCH -N 1
+#SBATCH -c 1
+#SBATCH -t 120:00:00
+#SBATCH --mem-per-cpu 805000
+#SBATCH -o /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/outputs/4wp1_LF_HS_vs_h2O_out.txt
+#SBATCH -e /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/outputs/4wp1_LF_HS_vs_h2O_err.txt
+
+~/anaconda3/bin/python /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/4wp1-k2.py

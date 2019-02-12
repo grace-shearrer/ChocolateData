@@ -45,7 +45,7 @@ y = behavioral["Label"]
 
 
 #restrict data to our target analysis 
-condition_mask = behavioral["Label"].isin(['HF_LS_receipt', "h20_receipt"])
+condition_mask = behavioral["Label"].isin(['LF_HS_receipt', "h20_receipt"])
 y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())

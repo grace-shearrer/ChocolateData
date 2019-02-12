@@ -32,11 +32,16 @@ from sklearn.model_selection import cross_val_score
 imag_mask='/projects/niblab/bids_projects/Experiments/ChocoData/images/bin_mask.nii.gz'
 
 
+# In[ ]:
+
+#######################
+### WAVE 4, SPLIT 1 ###
+#######################
 #our behavioral csv file 
-stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/w1_milkshake_all.csv'
+stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/4w_part2.csv'
 
 #our dataset concatenated image 
-dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/w1_milkshake_all.nii.gz'
+dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/4w_part2.nii.gz'
 #load behavioral data into a pandas df
 behavioral = pd.read_csv(stim, sep="\t")
 #grab conditional labels 
@@ -49,6 +54,8 @@ y = y[condition_mask]
 #confirm we have the # of condtions needed
 print(y.unique())
 
+session = behavioral[condition_mask].to_records(index=False)
+print(session.dtype.names)
 
 
 # In[ ]:
@@ -91,7 +98,7 @@ from sklearn.model_selection import GridSearchCV
 
 # Note that GridSearchCV takes an n_jobs argument that can make it go
 # much faster'
-k_range = [100]
+k_range = [10, 30, 50, 300, 500, 1000,  5000]
 grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
 nested_cv_scores = cross_val_score(grid, X, y, cv=5)
 
@@ -113,12 +120,12 @@ weight_img = masker.inverse_transform(coef)
 # Use the mean image as a background to avoid relying on anatomical data
 from nilearn import image
 mean_img = image.mean_img(dataset)
-mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_mean_nimask.nii')
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/4wp2_mean_nimask.nii')
 
 # Create the figure
 from nilearn.plotting import plot_stat_map, show
-display = plot_stat_map(weight_img, mean_img, title='SVM weights LF_HS vs h2O waves 1')
-display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_SVM_nimask.png')
+display = plot_stat_map(weight_img, mean_img, title='SVM weights LF_HS vs h2O 4 waves part 2')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/4wp2_SVM_nimask.png')
 # Saving the results as a Nifti file may also be important
-weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/w1_SVM_nimask.nii')
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images/4wp2_SVM_nimask.nii')
 
