@@ -6,8 +6,8 @@ Scripts for decoding on the LF_HS vs. h2O paradigm.
 
 Location of files on RENCI: 
 ``` /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O```  
-```# image files   
-/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images
+Location of image files on RENCI:  
+```/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/LF_HS_vs_h2O/images
 ```
 
 <br>
