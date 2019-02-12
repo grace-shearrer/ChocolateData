@@ -63,7 +63,7 @@ print(y.unique())
 
 
 
-masker = NiftiMasker(mask_img=imag_mask standardize=True, memory="nilearn_cache", memory_level=1)
+masker = NiftiMasker(mask_img=imag_mask, standardize=True, memory="nilearn_cache", memory_level=1)
 X = masker.fit_transform(dataset)
 # Apply our condition_mask
 X = X[condition_mask]
