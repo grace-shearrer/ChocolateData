@@ -1,14 +1,6 @@
 
 # coding: utf-8
 
-# In[ ]:
-
-
-# coding: utf-8
-
-# In[ ]:
-
-
 #this imports all the commands needed for the script to work#
 import os
 import numpy as np
@@ -59,6 +51,10 @@ y = y[condition_mask]
 print(y.unique())
 
 
+session = behavioral[condition_mask].to_records(index=False)
+print(session.dtype.names)
+
+
 masker = NiftiMasker(mask_img=imag_mask,
                      standardize=True, memory="nilearn_cache", memory_level=1)
 X = masker.fit_transform(dataset)
@@ -93,13 +89,30 @@ from sklearn.model_selection import GridSearchCV
 
 # Note that GridSearchCV takes an n_jobs argument that can make it go
 # much faster'
-k_range = [100, 500]
+k_range = [100]
 grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
 nested_cv_scores = cross_val_score(grid, X, y, cv=5)
 
 NEST_SCORE = np.mean(nested_cv_scores)
 print("Nested CV score: %.4f" % np.mean(nested_cv_scores))
 
+
+from sklearn.model_selection import LeaveOneGroupOut, cross_val_score
+
+# Define the cross-validation scheme used for validation.
+# Here we use a LeaveOneGroupOut cross-validation on the session group
+# which corresponds to a leave-one-session-out
+cv = LeaveOneGroupOut()
+
+# Compute the prediction accuracy for the different folds (i.e. session)
+cv_scores = cross_val_score(anova_svc, X, conditions, cv=cv, groups=session)
+
+# Return the corresponding mean prediction accuracy
+classification_accuracy = cv_scores.mean()
+
+# Print the results
+print("Classification accuracy: %.4f / Chance level: %f" %
+      (classification_accuracy, 1. / len(conditions.unique())))
 
 # In[ ]:
 
