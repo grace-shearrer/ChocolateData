@@ -13,11 +13,11 @@ Go straight to a paradigm folder for relevant files/explanations:
  
 
 ## Setting up the data  
-- Concatenating individual subject images (.nii.gz) to a single nifti file (.nii). [FILE](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/Concatenating_Images.ipynb)
-- Setting up behavioral (.csv) [FILE](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/Create_behaviorals-milkshake.ipynb)
-- Averaging masks [FILE](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/average_masks.ipynb)
-- Estimation Parameter search [FILE](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/estimation_parameter_search_milkshake.ipynb)
-- Separating waves for partial images [FILE](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/separating_waves.ipynb)
+- [Concatenating](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/Concatenating_Images.ipynb) individual subject images (.nii.gz) to a single nifti file (.nii). 
+- [Setting up behavioral](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/Create_behaviorals-milkshake.ipynb (.csv) 
+- [Averaging masks](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/average_masks.ipynb)
+- [Estimation Parameter search](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/estimation_parameter_search_milkshake.ipynb)
+- [Splitting waves for partial images](https://github.com/niblunc/ChocolateData/blob/master/ana/higher_ana_prep/separating_waves.ipynb)
 
  
 
