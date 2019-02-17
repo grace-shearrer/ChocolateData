@@ -1,6 +1,9 @@
+
 # coding: utf-8
 
-#this imports all the commands needed for the script to work#
+# In[ ]:
+
+
 import os
 import numpy as np
 import nilearn
@@ -23,10 +26,10 @@ imag_mask='/projects/niblab/bids_projects/Experiments/ChocoData/images/bin_mask.
 
 
 #our behavioral csv file 
-stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/w1_milkshake_all.csv'
+stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/4w_smallset.csv'
 
 #our dataset concatenated image 
-dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/w1_milkshake_all.nii.gz'
+dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/4w_smallset.nii.gz'
 #load behavioral data into a pandas df
 behavioral = pd.read_csv(stim, sep="\t")
 
@@ -56,35 +59,36 @@ X = X[condition_mask]
 
 
 
-
+# PREDICTION FUNCTION
 from sklearn.svm import SVC
 svc = SVC(kernel='linear')
 
-from sklearn.feature_selection import SelectKBest, f_classif
-feature_selection = SelectKBest(f_classif, k=500)
+# FEATURE SELECTION
+from sklearn.feature_selection import SelectPercentile, f_classif
+feature_selection = SelectPercentile(f_classif, percentile=10)
 
-# We have our classifier (SVC), our feature selection (SelectKBest), and now,
-# we can plug them together in a *pipeline* that performs the two operations
-# successively:
 from sklearn.pipeline import Pipeline
-
 
 anova_svc = Pipeline([('anova', feature_selection), ('svc', svc)])
 anova_svc.fit(X,y)
 y_pred = anova_svc.predict(X)
 
+from sklearn.model_selection import LeaveOneGroupOut, cross_val_score
+
+cv = LeaveOneGroupOut()
+
+# Compute the prediction accuracy for the different folds (i.e. session)
+
+#session = behavioral[condition_mask].to_records(index=False)
+#print(session.dtype.names)
+
+# NESTED CROSS VALIDATION 
+nested_cv_scores = cross_val_score(grid, X, y,  cv=5) 
+#cv_scores = cross_val_score(anova_svc, X, conditions,)
 
 
-# Here we run gridsearch with the SVC and feature selection
-from sklearn.model_selection import GridSearchCV
-k_range = [100, 500, 1000]
-
-grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
-nested_cv_scores = cross_val_score(grid, X, y, cv=5)
-
-#NEST_SCORE = np.mean(nested_cv_scores)
+# Print the results
 print("Nested CV score: %.4f" % np.mean(nested_cv_scores))
-
 
 
 # Here is the image 
@@ -98,12 +102,12 @@ weight_img = masker.inverse_transform(coef)
 # Use the mean image as a background to avoid relying on anatomical data
 from nilearn import image
 mean_img = image.mean_img(dataset)
-mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/w1_mean_nimask.nii')
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/4w_small_mean_nimask.nii')
 
 # Create the figure
 from nilearn.plotting import plot_stat_map, show
-display = plot_stat_map(weight_img, mean_img, title='Milkshake vs. H2O | wave 1 | SVM weights')
-display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/w1_SVM_nimask.png')
+display = plot_stat_map(weight_img, mean_img, title='Milkshake vs. h2O , 4 waves')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/4w_small_SVM_nimask.png')
 # Saving the results as a Nifti file may also be important
-weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/w1_SVM_nimask.nii')
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/4w_small_SVM_nimask.nii')
 

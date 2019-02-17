@@ -70,6 +70,41 @@ X = X[condition_mask]
 
 
 
+
+"""
+
+from sklearn.svm import SVC
+svc = SVC(kernel='linear')
+
+from sklearn.feature_selection import SelectaPercentile, f_classif
+feature_selection = SelectKBest(f_classif, percentile=5)
+
+# We have our classifier (SVC), our feature selection (SelectKBest), and now,
+# we can plug them together in a *pipeline* that performs the two operations
+# successively:
+from sklearn.pipeline import Pipeline
+
+
+anova_svc = Pipeline([('anova', feature_selection), ('svc', svc)])
+anova_svc.fit(X,y)
+y_pred = anova_svc.predict(X)
+from sklearn.model_selection import LeaveOneGroupOut, cross_val_score
+
+# Define the cross-validation scheme used for validation.
+# Here we use a LeaveOneGroupOut cross-validation on the session group
+# which corresponds to a leave-one-session-out
+cv = LeaveOneGroupOut()
+
+# Compute the prediction accuracy for the different folds (i.e. session)
+
+percentiles = [1, 5, 10, 15, 20]
+grid = GridSearchCV(anova_svc, param_grid={'anova__percentile': percentiles}, verbose=1, n_jobs=1, cv=5)
+nested_cv_scores = cross_val_score(grid, X, y,  cv=cv, groups=session)
+"""
+
+
+
+
 from sklearn.svm import SVC
 svc = SVC(kernel='linear')
 
@@ -86,26 +121,18 @@ anova_svc = Pipeline([('anova', feature_selection), ('svc', svc)])
 anova_svc.fit(X,y)
 y_pred = anova_svc.predict(X)
 
-
-# In[ ]:
-
-
 # Here we run gridsearch
 from sklearn.model_selection import GridSearchCV
-# We are going to tune the parameter 'k' of the step called 'anova' in
-# the pipeline. Thus we need to address it as 'anova__k'.
 
-# Note that GridSearchCV takes an n_jobs argument that can make it go
-# much faster'
-k_range = [10, 100]
+k_range = [10, 100, 500, 1000]
 grid = GridSearchCV(anova_svc, param_grid={'anova__k': k_range}, verbose=1, n_jobs=1, cv=5)
 nested_cv_scores = cross_val_score(grid, X, y, cv=5)
 
-NEST_SCORE = np.mean(nested_cv_scores)
+#NEST_SCORE = np.mean(nested_cv_scores)
 print("Nested CV score: %.4f" % np.mean(nested_cv_scores))
 
 
-# In[ ]:
+
 
 
 # Here is the image 
