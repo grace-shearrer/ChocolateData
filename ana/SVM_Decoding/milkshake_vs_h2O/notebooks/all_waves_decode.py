@@ -1,0 +1,120 @@
+
+# coding: utf-8
+
+# # Decoding Milkshake vs. H2O 
+# ## All available data in waves 1-4
+
+
+import os
+import sys
+import numpy as np
+import nilearn
+import glob
+import nibabel as nib
+import pandas as pd 
+from sklearn.model_selection import cross_val_score
+from nilearn.input_data import NiftiMasker 
+import numpy as np
+np.seterr(divide='ignore', invalid='ignore')
+import warnings
+warnings.filterwarnings("ignore")
+import matplotlib
+matplotlib.use('Agg')
+
+
+batchID = sys.argv[1]
+batchID = str(batchID)
+
+#image mask
+imag_mask='/projects/niblab/bids_projects/Experiments/ChocoData/images/bin_mask.nii.gz'
+
+
+#our behavioral csv file 
+stim = '/projects/niblab/bids_projects/Experiments/ChocoData/behavorial_data/all_waves_b%s.csv'%(batchID)
+
+#our dataset concatenated image 
+dataset='/projects/niblab/bids_projects/Experiments/ChocoData/images/all_waves_b%s.nii.gz'%(batchID)
+#load behavioral data into a pandas df
+behavioral = pd.read_csv(stim, sep="\t")
+
+
+
+#grab conditional labels and set up milkshake
+
+behavioral["Label"] = behavioral.replace(['HF_LS_receipt', 'LF_LS_receipt', 'LF_HS_receipt', 'HF_HS_receipt'], 'milkshake')
+
+y = behavioral["Label"]
+print(y.unique())
+
+
+# ['rest' 'h20_pic' 'h20_receipt' 'milkshake_pic' 'milkshake' 'rinse']
+# 
+
+# In[ ]:
+
+
+
+#restrict data to our target analysis 
+condition_mask = behavioral["Label"].isin(['milkshake', "h20_receipt"])
+y = y[condition_mask]
+#confirm we have the # of condtions needed
+print(y.unique())
+
+
+
+# ['h20_receipt' 'milkshake']
+
+# In[ ]:
+
+
+masker = NiftiMasker(mask_img=imag_mask, standardize=True, memory="nilearn_cache", memory_level=1)
+X = masker.fit_transform(dataset)
+# Apply our condition_mask
+X = X[condition_mask]
+
+
+
+# PREDICTION FUNCTION
+from sklearn.svm import SVC
+svc = SVC(kernel='linear')
+
+# FEATURE SELECTION
+from sklearn.feature_selection import SelectPercentile, f_classif, SelectKBest
+feature_selection = SelectKBest(f_classif, k=500)
+
+from sklearn.pipeline import Pipeline
+
+anova_svc = Pipeline([('anova', feature_selection), ('svc', svc)])
+anova_svc.fit(X,y)
+y_pred = anova_svc.predict(X)
+
+# NESTED CROSS VALIDATION 
+nested_cv_scores = cross_val_score(anova_svc, X, y,  cv=5) 
+#cv_scores = cross_val_score(anova_svc, X, conditions,)
+# Print the results
+print("Nested CV score: %.4f" % np.mean(nested_cv_scores))
+
+
+# In[ ]:
+
+
+# Here is the image 
+coef = svc.coef_
+# reverse feature selection
+coef = feature_selection.inverse_transform(coef)
+# reverse masking
+weight_img = masker.inverse_transform(coef)
+
+
+# Use the mean image as a background to avoid relying on anatomical data
+from nilearn import image
+mean_img = image.mean_img(dataset)
+mean_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/all/all_waves_b%s_mean_nimask.nii'%batchID)
+
+# Create the figure
+from nilearn.plotting import plot_stat_map, show
+display = plot_stat_map(weight_img, mean_img, title='Milkshake vs. h2O')
+display.savefig('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/all/all_waves_b%s_SVM_nimask.png'%batchID)
+# Saving the results as a Nifti file may also be important
+weight_img.to_filename('/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/images/all/all_waves_b%s_SVM_nimask.nii'%batchID)
+

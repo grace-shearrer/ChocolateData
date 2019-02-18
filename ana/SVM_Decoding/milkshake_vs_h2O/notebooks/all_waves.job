@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+#SBATCH --job-name=ALLWAVES
+#SBATCH -N 1
+#SBATCH -c 1
+#SBATCH -t 120:00:00
+#SBATCH --mem-per-cpu 405000
+## %A == SLURM_ARRAY_JOB_ID
+## %a == SLURM_ARRAY_TASK_ID
+#SBATCH -o /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/all_waves_b%a_milk_vs_h2O_out.txt
+#SBATCH -e /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/all_waves_b%a_milk_vs_h2O_err.txt
+
+batch=${SLURM_ARRAY_TASK_ID}
+~/anaconda3/bin/python /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/all_waves_decode.py $batch
