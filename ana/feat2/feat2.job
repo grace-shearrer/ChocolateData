@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+#SBATCH --job-name=F2_CHOCO
+#SBATCH -N 1
+#SBATCH -c 1
+#SBATCH -t 1:30:00
+#SBATCH --mem-per-cpu 25000
+## %A == SLURM_ARRAY_JOB_ID
+## %a == SLURM_ARRAY_TASK_ID
+#SBATCH -o /projects/niblab/bids_projects/Experiments/Bevel/derivatives/code/error_files/feat2_bevel_%a_%A_out.txt
+#SBATCH -e /projects/niblab/bids_projects/Experiments/Bevel/derivatives/code/error_files/feat2_bevel_%a_%A_err.txt
+
+if [ ${SLURM_ARRAY_TASK_ID} -lt 10 ]; then
+    sub="sub-00${SLURM_ARRAY_TASK_ID}"
+elif [ ${SLURM_ARRAY_TASK} -lt 100 ]; then
+    sub="sub-0${SLURMA_ARRAY_TASK_ID}"
+else
+    sub="sub-${SLURM_ARRAY_TASK_ID}"
+fi
+
+/projects/niblab/modules/software/fsl/5.0.10/bin/feat /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/${sub}/ses-1/func/Analysis/feat2/${sub}_design.fsf

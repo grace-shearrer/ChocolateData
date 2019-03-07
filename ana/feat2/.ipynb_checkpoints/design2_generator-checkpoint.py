@@ -20,10 +20,9 @@ for sub in SUB_DIRS:
     with open(os.path.join(DER_DIR, "design2.fsf"), 'r') as infile:
         tempfsf=infile.read()
         # set outpath for fsf OUTPATH variable, by run
-        subID =  sub.split("/")[-1]
-        outpath = os.path.join(sub, "func/Analysis/feat2", subID)
+        outpath = os.path.join(sub, "func/Analysis/feat2", subject)
         print(">>>>>>>>>>>>>>>>>SETTING DESIGN OUTPATH: ", outpath)
-        #tempfsf = tempfsf.replace("OUTPUT", outpath)
+        tempfsf = tempfsf.replace("OUTPUT", outpath)
         print(FEATS)
         for index, feat_path in enumerate(FEATS):
             feat_id = "FEAT%s"%(index+1)
