@@ -1,0 +1,13 @@
+<head></head>
+<body>
+    <h3>Subject: {{ subject }} | Run: {{ run }}</h3>
+    {% for sub in dict %}
+        {% for run in dict[sub] %}
+        <h3>Subject: {{ sub }} | Run: {{ run }}</h3>
+            {% for img in dict[sub][run] %}
+            <img src="{{ img }}" alt="BAD" width="750" />
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</body>
+    
