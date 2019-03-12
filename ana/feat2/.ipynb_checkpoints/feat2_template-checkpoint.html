@@ -1,11 +1,14 @@
-<head><h1>Session {{ sess}}</h1></head>
+<head>
+    <h1>Session {{ sess}}</h1>
+    <h2>Feat2 subject directory count: {{ ct }}</h2>
+</head>
 <body>
-    <h3>Subject: {{ subject }} </h3>
     {% for sub in dict %}
-    <h3>Subject: {{ sub }} | Run: {{ run }}</h3>
-        {% for img in dict[sub] %}
-        <img src="{{ img }}" alt="BAD" width="750" /> <br>
-        {% endfor %}
+    <h3>Subject: {{ sub }}</h3>
+        <!--{% for img in dict[sub] %}-->
+        {% img1 =  dict[sub][0] %}
+        <img src="{{img1 }}" alt="BAD" width="750" /> <br>
+        <!--{% endfor %}-->
     {% endfor %}
 </body>
     
