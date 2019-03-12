@@ -5,7 +5,7 @@
 #SBATCH -c 1
 #SBATCH -t 168:00:00
 #SBATCH --mem-per-cpu 675000
-#SBATCH -o /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/4w_p2_milk_vs_h2O_out_a.txt
-#SBATCH -e /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/4w_p2_milk_vs_h2O_err_a.txt
+#SBATCH -o /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/4w_p2_milk_vs_h2O_out.txt
+#SBATCH -e /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/4w_p2_milk_vs_h2O_err.txt
 
-~/anaconda3/bin/python /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/4w_p2.py
+~/anaconda3/bin/python /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/scripts/4w_p2.py
