@@ -1,7 +1,7 @@
 import glob
 import os
 DER_DIR = "/projects/niblab/bids_projects/Experiments/ChocoData/derivatives"
-SUB_DIR = "/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/sub-*/ses-3"
+SUB_DIR = "/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/sub-*/ses-4"
 SUB_DIRS = glob.glob(SUB_DIR)
 
 for sub in SUB_DIRS:
@@ -24,9 +24,13 @@ for sub in SUB_DIRS:
         print(">>>>>>>>>>>>>>>>>SETTING DESIGN OUTPATH: ", outpath)
         tempfsf = tempfsf.replace("OUTPUT", outpath)
         print(FEATS)
-        for index, feat_path in enumerate(FEATS):
-            feat_id = "FEAT%s"%(index+1)
-            tempfsf = tempfsf.replace(feat_id, feat_path)
+        if len(FEATS) == 1:
+            tempfsf = tempfsf.replace("FEAT1", feat_path)
+            tempfsf = tempfsf.replace("FEAT2", feat_path)
+        else:
+            for index, feat_path in enumerate(FEATS):
+                feat_id = "FEAT%s"%(index+1)
+                tempfsf = tempfsf.replace(feat_id, feat_path)
         OUTFILE_PATH = os.path.join(FEAT2_DIR, "%s_design.fsf"%subject)
         print("OUTFILE ------------------------>>>> ", OUTFILE_PATH)
         with open(OUTFILE_PATH, "w") as outfile:
