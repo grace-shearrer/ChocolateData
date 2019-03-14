@@ -14,7 +14,6 @@ for sub in SUB_DIRS:
     else:
         os.makedirs(FEAT2_DIR)
     print("> STARTING PROGRAM......")
-    print("----------------------->>>>SUBJECT: ",sub)
     FEATS_PATH = os.path.join(sub, "func/Analysis/feat1/*.feat")
     FEATS = glob.glob(FEATS_PATH)
     with open(os.path.join(DER_DIR, "design_files/design2.fsf"), 'r') as infile:
@@ -25,8 +24,9 @@ for sub in SUB_DIRS:
         tempfsf = tempfsf.replace("OUTPUT", outpath)
         print(FEATS)
         if len(FEATS) == 1:
-            tempfsf = tempfsf.replace("FEAT1", feat_path)
-            tempfsf = tempfsf.replace("FEAT2", feat_path)
+            for feat_path in FEATS:
+                tempfsf = tempfsf.replace("FEAT1", feat_path )
+                tempfsf = tempfsf.replace("FEAT2", feat_path)
         else:
             for index, feat_path in enumerate(FEATS):
                 feat_id = "FEAT%s"%(index+1)

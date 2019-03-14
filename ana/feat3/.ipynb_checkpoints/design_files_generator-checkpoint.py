@@ -1,35 +1,32 @@
 import glob
 import os
 DER_DIR = "/projects/niblab/bids_projects/Experiments/ChocoData/derivatives"
-SUB_DIR = "/projects/niblab/bids_projects/Experiments/ChocoData/derivatives/sub-*/ses-4"
-SUB_DIRS = glob.glob(SUB_DIR)
+SESSIONS = ["ses-4"] #, "ses-2"] #, "ses-3", "ses-4"]
+COPE_CT = 28
 
-for sub in SUB_DIRS:
-    subject = sub.split("/")[-2]
-    print("SUBJECT: ", subject)
-    #check for existence of feat2 directory
-    FEAT2_DIR = os.path.join(sub, "func/Analysis/feat2")
-    if os.path.exists(FEAT2_DIR):
-        pass
-    else:
-        os.makedirs(FEAT2_DIR)
-    print("> STARTING PROGRAM......")
-    print("----------------------->>>>SUBJECT: ",sub)
-    FEATS_PATH = os.path.join(sub, "func/Analysis/feat1/*.feat")
-    FEATS = glob.glob(FEATS_PATH)
-    with open(os.path.join(DER_DIR, "design2.fsf"), 'r') as infile:
+
+
+for ses in SESSIONS:
+    subject_paths= glob.glob(os.path.join(DER_DIR, "sub-*/%s"%ses))
+    for d in range(0, COPE_CT):
+        with open(os.path.join(DER_DIR, "design_files/design3_93subs.fsf"), 'r') as infile:
         tempfsf=infile.read()
-        # set outpath for fsf OUTPATH variable, by run
-        outpath = os.path.join(sub, "func/Analysis/feat2", subject)
-        print(">>>>>>>>>>>>>>>>>SETTING DESIGN OUTPATH: ", outpath)
-        tempfsf = tempfsf.replace("OUTPUT", outpath)
-        print(FEATS)
-        for index, feat_path in enumerate(FEATS):
-            feat_id = "FEAT%s"%(index+1)
-            tempfsf = tempfsf.replace(feat_id, feat_path)
-        OUTFILE_PATH = os.path.join(FEAT2_DIR, "%s_design.fsf"%subject)
-        print("OUTFILE ------------------------>>>> ", OUTFILE_PATH)
-        with open(OUTFILE_PATH, "w") as outfile:
-            outfile.write(tempfsf)
-        outfile.close()
-    infile.close()
+            cope_id = d + 1
+            output_folder = os.path.join(DER_DIR, "group_ana/%s/cope_%s"%(ses, cope_id))
+            print(output_folder)
+            if not os.path.exists(os.path.join(DER_DIR, "group_ana/%s"%(ses))):
+                os.makedirs(os.path.join(DER_DIR, "group_ana/%s"%(ses)))
+            #REPLACE OUTPUT
+            tempfsf = tempfsf.replace("OUTPUT", output_folder)
+            for c, path in enumerate(sorted(subject_paths)):
+                #REPLACE
+                input_id = c+1
+                keyword = "FEAT-%s_FILE"%input_id
+                cope_folder = os.path.join(path, "func/Analysis/feat2/%s.gfeat/cope%s.feat"%(path.split("/")[-2], cope_id))
+                #print(keyword, cope_folder)
+                tempfsf = tempfsf.replace(keyword, cope_folder)
+            OUTFILE_PATH = os.path.join(DER_DIR, "group_ana/%s/cope_%s.fsf"%(ses,cope_id))
+            with open(OUTFILE_PATH, "w") as outfile:
+                outfile.write(tempfsf)
+            outfile.close()
+        infile.close()
