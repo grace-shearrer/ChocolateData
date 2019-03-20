@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+#SBATCH --job-name=PREDICT
+#SBATCH -N 1
+#SBATCH -c 1
+#SBATCH -t 120:00:00
+#SBATCH --mem-per-cpu 525000
+#SBATCH -o /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/_4w_p1_milk_vs_h2O_out_a.txt
+#SBATCH -e /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/outputs/_4w_p1_milk_vs_h2O_err_a.txt
+
+~/anaconda3/bin/python /projects/niblab/bids_projects/Experiments/ChocoData/derivatives/code/decoding/milkshake_vs_h2O/scripts/predict.py
